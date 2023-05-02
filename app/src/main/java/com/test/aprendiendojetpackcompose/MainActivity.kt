@@ -5,10 +5,13 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.ModalNavigationDrawer
@@ -43,7 +46,7 @@ fun app() {
         item {
             Image(
                 modifier = Modifier
-                    .fillMaxWidth()
+                    .fillMaxWidth().padding(16.dp)
                     .height(400.dp),
                 painter = painterResource(id = R.drawable.lape_cubico2),
                 contentDescription = "lape_image"
@@ -56,12 +59,34 @@ fun app() {
                 textAlign = TextAlign.Center
             )
             Text(text = "Descripción:",
-                color = Color.White)
+                color = Color.White,
+                modifier = Modifier.padding(16.dp))
             Text(text = "LAPE es la primera sonda autoreplicante en el universo conocido, " +
-                    "el primer modelo funcional fue creado por Outis Project en 2050, " +
+                    "el primer modelo funcional fue creado por Outis Project en 20508" +
+                    ", " +
                     "la financiación fue obtenida gracias a un videojuego P2E desarrollado " +
                     "por la misma empresa veinte años antes. ",
-                color = Color.White)
+                color = Color.White,
+                modifier = Modifier.padding(16.dp))
+            Row(
+                horizontalArrangement = Arrangement.SpaceBetween,
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(16.dp)){
+
+                Text(text = "Largo:", color = Color.White)
+                Text(text = "0.9 m", color = Color.White)
+            }
+            Row(
+                horizontalArrangement = Arrangement.SpaceBetween,
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(16.dp)){
+
+                Text(text = "Ancho:", color = Color.White)
+                Text(text = "1 m", color = Color.White)
+            }
+
         }
     }
 }
