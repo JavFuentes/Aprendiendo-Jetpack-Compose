@@ -43,42 +43,55 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.test.aprendiendojetpackcompose.ui.theme.AprendiendoJetpackComposeTheme
 
+// Esta anotación indica que se está utilizando una API experimental de Material3
 @OptIn(ExperimentalMaterial3Api::class)
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        // Establecer el contenido de la actividad con el composable ViewContainer
         setContent {
             ViewContainer()
         }
     }
 }
 
+// Anotación para indicar que se está utilizando una API experimental de Material3
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @ExperimentalMaterial3Api
 @Composable
+// Anotación para crear una vista previa del composable ViewContainer
 @Preview
 fun ViewContainer() {
+    // Crear un Scaffold (andamio) con el composable Content y el FAB (botón de acción flotante)
     Scaffold(
         content = { Content() },
         floatingActionButton = { FAB() },
         floatingActionButtonPosition = FabPosition.End
-
     )
 }
 
+// Composable que crea el FAB
 @Preview
 @Composable
-fun FAB(){
+fun FAB() {
+    // Obtener el contexto actual para mostrar un Toast
     val context = LocalContext.current
-    FloatingActionButton(onClick = { Toast.makeText(context,"Botón operativo!", Toast.LENGTH_LONG).show() }) {
+    // Crear el FAB con un texto vacío y un listener que muestra un Toast al hacer clic
+    FloatingActionButton(
+        onClick = { Toast.makeText(context, "Botón operativo!", Toast.LENGTH_LONG).show() }
+
+    ) {
         Text(text = "")
     }
 }
 
+
+// Composable que crea la barra de herramientas (Toolbar)
 @OptIn(ExperimentalMaterial3Api::class)
 @Preview
 @Composable
 fun Toolbar() {
+    // Crear una TopAppBar (barra de herramientas superior) con un título y un color de fondo
     TopAppBar(
         title = { Text(text = "LAPE") }, Modifier.background(color = Color.Black)
     )
@@ -86,13 +99,16 @@ fun Toolbar() {
 
 @Composable
 fun Content() {
+    // Se define una variable que almacenará el contador de likes
     var likesCounter by rememberSaveable { mutableStateOf(0) }
 
+    // Se crea un LazyColumn con un fondo negro que ocupará toda la pantalla
     LazyColumn(
         modifier = Modifier
             .fillMaxSize()
             .background(Color.Black)
     ) {
+        // Se agrega un item que contiene una imagen, un botón de like y la cantidad de likes
         item {
             Image(
                 modifier = Modifier
@@ -107,14 +123,16 @@ fun Content() {
                 Image(
                     painter = painterResource(id = R.drawable.ic_favorite),
                     contentDescription = "like",
-                    modifier = Modifier.clickable { likesCounter++ }
+                    modifier = Modifier.clickable { likesCounter++ } // Se agrega un listener al botón de like que incrementa el contador
                 )
                 Text(
-                    text = likesCounter.toString(),
+                    text = likesCounter.toString(), // Se muestra la cantidad actual de likes
                     color = Color.White,
                     modifier = Modifier.padding(start = 4.dp)
                 )
             }
+
+            // Se agrega un título y una descripción
             Text(
                 text = "LAPE",
                 fontSize = 32.sp,
@@ -127,6 +145,8 @@ fun Content() {
                 color = Color.White,
                 modifier = Modifier.padding(16.dp)
             )
+
+            // Se agrega un texto con información sobre LAPE
             Text(
                 text = "LAPE es la primera sonda autoreplicante en el universo conocido, " +
                         "el primer modelo funcional fue creado por Outis Project en 2051" +
@@ -136,6 +156,8 @@ fun Content() {
                 color = Color.White,
                 modifier = Modifier.padding(16.dp)
             )
+
+            // Se agregan dos filas con información sobre el tamaño de LAPE
             Row(
                 horizontalArrangement = Arrangement.SpaceBetween,
                 modifier = Modifier
